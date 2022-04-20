@@ -1,8 +1,6 @@
-
 /* console.log(window.Telegram.WebApp); */
-
+/* const request = require('request'); */
 const TelegramBot = require('node-telegram-bot-api');
-const request = require('request');
 
 const token = '5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo';
 

@@ -8,27 +8,27 @@ let price = 0;
 let num = 0;
 
 const randomId = () => {
-	return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 };
 
 const priceWithoutSpaces = (str) => {
-	return str.replace(/\s/g, '');
+    return str.replace(/\s/g, '');
 };
 
 const normalPrice = (str) => {
-	return String(str).replace(/(\d)&nbsp;(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+    return String(str).replace(/(\d)&nbsp;(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
 };
 
 const plusFullPrice = (currentPrice) => {
-	return price += currentPrice;
+    return price += currentPrice;
 };
 
 const minusFullPrice = (currentPrice) => {
-	return price -= currentPrice;
+    return price -= currentPrice;
 };
 
 const printFullPrice = () => {
-	fullPrice.textContent = `Итого: ${normalPrice(price)} ₽`;
+    fullPrice.textContent = `Итого: ${normalPrice(price)} ₽`;
 };
 
 /* const printQuantity = () => {
@@ -38,7 +38,7 @@ const printFullPrice = () => {
 }; */
 
 const generateCartProduct = (img, title, price, id) => {
-	return `
+    return `
         <div class="basket__product" data-id="${id}">
             
                 <img class="basket__product-image" src="${img}" alt="${title}">
@@ -69,34 +69,34 @@ const deleteProducts = (productParent) => {
 } */
 
 adds.forEach(el => {
-	el.closest('.product').setAttribute('data-id', randomId());
+    el.closest('.product').setAttribute('data-id', randomId());
 
-	el.addEventListener('click', (e) => {
-		let self = e.currentTarget;
-		let parent = self.closest('.product');
-		let id = parent.dataset.id;
-		let img = parent.querySelector('.product__image').getAttribute('src');
-		let title = parent.querySelector('.product__name').textContent;
+    el.addEventListener('click', (e) => {
+        let self = e.currentTarget;
+        let parent = self.closest('.product');
+        let id = parent.dataset.id;
+        let img = parent.querySelector('.product__image').getAttribute('src');
+        let title = parent.querySelector('.product__name').textContent;
         let number = parent.querySelector('.product__number');
         number.textContent = Number(number.textContent) + 1;
-		let priceString = priceWithoutSpaces(parent.querySelector('.product__call').textContent);
-		let priceNumber = parseInt(priceWithoutSpaces(parent.querySelector('.product__call').textContent));
+        let priceString = priceWithoutSpaces(parent.querySelector('.product__call').textContent);
+        let priceNumber = parseInt(priceWithoutSpaces(parent.querySelector('.product__call').textContent));
         /* console.log(priceNumber); */
-		plusFullPrice(priceNumber);
+        plusFullPrice(priceNumber);
 
-		printFullPrice();
+        printFullPrice();
 
-		cartProductsList.insertAdjacentHTML('afterbegin', generateCartProduct(img, title, priceString, id));
+        cartProductsList.insertAdjacentHTML('afterbegin', generateCartProduct(img, title, priceString, id));
 
-		/* printQuantity(); */
-		
-		self.disabled = true;
+        /* printQuantity(); */
+
+        self.disabled = true;
         /* self.classList.remove('product__button');
         self.textContent = '';
         self.insertAdjacentHTML('afterbegin', generateButtons()); */
 
-        
-	});
+
+    });
 });
 
 cartProductsList.addEventListener('click', (e) => {
@@ -134,6 +134,33 @@ closePopup.addEventListener('click', () => {
     popup.classList.remove('active');
     document.querySelector('.catalog__items').classList.remove('hide');
 })
+
+const pay = document.querySelector('.basket__button');
+
+const TelegramBot = require('node-telegram-bot-api');
+
+const token = '5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo';
+
+const bot = new TelegramBot(token, { polling: true });
+
+pay.addEventListener('click', () => {
+
+    window.Telegram.WebApp.close();
+
+    bot.on('message', function(message) {
+        /* var chat_id = message.chat.id; */
+
+        bot.sendPhoto({
+                chat_id: message.chat.id,
+                caption: 'Общая сумма: ${fullPrice}',
+                photo: '/images/icon.png'
+            })
+            .then(function(data) {
+                console.log(data);
+            });
+    });
+})
+
 
 /* let plusMin = `
     <div class="product__plus-minus">
