@@ -16,7 +16,7 @@ const priceWithoutSpaces = (str) => {
 };
 
 const normalPrice = (str) => {
-	return String(str).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
+	return String(str).replace(/(\d)&nbsp;(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
 };
 
 const plusFullPrice = (currentPrice) => {
@@ -40,13 +40,12 @@ const printFullPrice = () => {
 const generateCartProduct = (img, title, price, id) => {
 	return `
         <div class="basket__product" data-id="${id}">
-            <div class="basket__product-left">
+            
                 <img class="basket__product-image" src="${img}" alt="${title}">
                 <p class="basket__product-title">${title}</p>
                 <p class="basket__product-price">${normalPrice(price)}</p>
-            </div>
             
-            <div class="basket__number">Delete</div>
+            <div class="basket__number">Удалить</div>
         </div>
 	`;
 };
@@ -127,10 +126,12 @@ const popup = document.querySelector('.basket');
 
 openPopup.addEventListener('click', (e) => {
     popup.classList.add('active');
+    openPopup.classList.add('hide');
 })
 
 closePopup.addEventListener('click', () => {
     popup.classList.remove('active');
+    openPopup.classList.remove('hide');
 })
 
 /* let plusMin = `

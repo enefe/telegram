@@ -23,21 +23,31 @@
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
+        flex-wrap: wrap;
+        width: 100%;
     }
 
     .product {
         /* width: 100px; */
-        height: 320px;
+        width: 30%;
+        height: 280px;
+        /* min-width: 100px; */
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
+        
         position: relative;
         box-shadow: 3px 3px 3px #ff7f50a1;
         background-color: #fceded;
         margin-right: 10px;
+        margin-bottom: 20px;
         padding-top: 10px;
         /* padding: 10px; */
+    }
+
+    .product:nth-child(3n) {
+        margin-right: 0;
     }
 
     .product__number {
@@ -77,7 +87,9 @@
         color: white;
         background-color: #FF7F50;
         border: 0;
-        padding: 20px 25px;
+        text-align: center;
+        font-size: 13px;
+        padding: 10px 15px;
         border-radius: 5px;
         cursor: pointer;
         margin-bottom: 10px;
@@ -121,6 +133,7 @@
         width: 100%;
         height: 100%;
         background-color: #ffe8e8;
+        z-index: 3;
         top: 0;
         left: 0;
         flex-direction: column;
@@ -158,17 +171,19 @@
 
     .basket__product {
         display: flex;
-        margin: 10px;
+        position: relative;
+        /* margin: 10px; */
+        margin-bottom: 10px;
         padding: 10px;
         background-color: aliceblue;
         border-radius: 3px;
-        min-width: 300px;
+        width: 95%;
         box-sizing: border-box;
     }
 
     .basket__product-left {
         display: flex;
-        margin-right: 50px;
+       /*  margin-right: 20px; */
     }
 
     .basket__product-image {
@@ -184,9 +199,13 @@
     .basket__number {
         color: #FF7F50;
         cursor: pointer;
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
     }
 
     .basket__product-price {
+        /* width: 40px; */
         font-size: 15px;
         margin: 0;
         padding: 0;
