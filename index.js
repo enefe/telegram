@@ -1,3 +1,4 @@
+Telegram.WebApp.ready();
 const adds = document.querySelectorAll('.product__button');
 const deleteProduct = document.querySelectorAll('.basket__number');
 const plus = document.querySelectorAll('.plus');
@@ -145,20 +146,9 @@ const bot = new TelegramBot(token, { polling: true });
 
 pay.addEventListener('click', () => {
 
-    window.Telegram.WebApp.close();
+    Telegram.WebApp.close();
 
-    bot.on('message', function(message) {
-        /* var chat_id = message.chat.id; */
 
-        bot.sendPhoto({
-                chat_id: message.chat.id,
-                caption: 'Общая сумма: ${fullPrice}',
-                photo: '/images/icon.png'
-            })
-            .then(function(data) {
-                console.log(data);
-            });
-    });
 })
 
 
