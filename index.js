@@ -146,7 +146,9 @@ const bot = new TelegramBot(token, { polling: true }); */
 
 pay.addEventListener('click', () => {
 
+    let full = document.querySelector('.fullprice').textContent;
     Telegram.WebApp.close();
+    Telegram.WebApp.sendData(full);
 
 })
 
