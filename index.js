@@ -149,6 +149,7 @@ pay.addEventListener('click', () => {
     let full = document.querySelector('.fullprice').textContent;
     Telegram.WebApp.close();
     Telegram.WebApp.sendData(full);
+    console.log(Telegram.WebApp.initData);
 
 })
 
