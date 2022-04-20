@@ -1,9 +1,11 @@
 const adds = document.querySelectorAll('.product__button');
+const deleteProduct = document.querySelectorAll('.basket__number');
 const plus = document.querySelectorAll('.plus');
 const minus = document.querySelectorAll('.minus');
 const cartProductsList = document.querySelector('.basket__products');
 const fullPrice = document.querySelector('.fullprice');
 let price = 0;
+let num = 0;
 
 const randomId = () => {
 	return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -41,22 +43,31 @@ const generateCartProduct = (img, title, price, id) => {
             <div class="basket__product-left">
                 <img class="basket__product-image" src="${img}" alt="${title}">
                 <p class="basket__product-title">${title}</p>
-                <div class="basket__number">1</div>
+                <p class="basket__product-price">${normalPrice(price)}</p>
             </div>
-
-            <p class="basket__product-price">${normalPrice(price)}</p>
+            
+            <div class="basket__number">Delete</div>
         </div>
 	`;
 };
 
-const generateButtons = () => {
+const deleteProducts = (productParent) => {
+    let id = productParent.dataset.id;
+    document.querySelector(`.product[data-id="${id}"]`).querySelector('.product__number').textContent = (document.querySelector(`.product[data-id="${id}"]`).querySelector('.product__number').textContent) - 1;
+    let currentPrice = parseInt(priceWithoutSpaces(productParent.querySelector('.basket__product-price').textContent));
+    minusFullPrice(currentPrice);
+    printFullPrice();
+    productParent.remove();
+}
+
+/* const generateButtons = () => {
     return `
         <div class="product__plus-minus">
             <button class="product__button plus">+</button>
             <button class="product__button minus">-</button>
         </div>
 	`;
-}
+} */
 
 adds.forEach(el => {
 	el.closest('.product').setAttribute('data-id', randomId());
@@ -67,6 +78,8 @@ adds.forEach(el => {
 		let id = parent.dataset.id;
 		let img = parent.querySelector('.product__image').getAttribute('src');
 		let title = parent.querySelector('.product__name').textContent;
+        let number = parent.querySelector('.product__number');
+        number.textContent = Number(number.textContent) + 1;
 		let priceString = priceWithoutSpaces(parent.querySelector('.product__call').textContent);
 		let priceNumber = parseInt(priceWithoutSpaces(parent.querySelector('.product__call').textContent));
         /* console.log(priceNumber); */
@@ -82,8 +95,25 @@ adds.forEach(el => {
         /* self.classList.remove('product__button');
         self.textContent = '';
         self.insertAdjacentHTML('afterbegin', generateButtons()); */
+
+        
 	});
 });
+
+cartProductsList.addEventListener('click', (e) => {
+    if (e.target.classList.contains('basket__number')) {
+        deleteProducts(e.target.closest('.basket__product'));
+    }
+})
+
+/* deleteProduct.forEach(el => {
+    el.addEventListener('click', (e) => {
+        console.log(e);
+        let self = e.currentTarget;
+        let parent = self.closest('.basket__product');
+        parent.remove();
+    })
+}) */
 
 /* minus.forEach(el => {
     el.addEventListener('click', (e) => {

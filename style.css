@@ -2,7 +2,7 @@
     .content {
         min-width: 300px;
         color:black;
-        background-color: #ffe8e8;
+        background-color: #ffe5e5;
     }
 
     .catalog {
@@ -27,23 +27,31 @@
 
     .product {
         /* width: 100px; */
-        height: 300px;
+        height: 320px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
         position: relative;
+        box-shadow: 3px 3px 3px #ff7f50a1;
+        background-color: #fceded;
+        margin-right: 10px;
+        padding-top: 10px;
+        /* padding: 10px; */
     }
 
     .product__number {
+        text-align: center;
+        color: white;
+        font-size: 15px;
         position: absolute;
-        top: 0;
-        right: 0;
+        top: 5px;
+        right: 5px;
         background: #FF7F50;
-        width: 60px;
-        height: 60px;
+        width: 15px;
+        height: 15px;
         border-radius: 30px;
-        display: none;
+        /* display: none; */
     }
 
     .product__image {
@@ -65,12 +73,15 @@
     }
 
     .product__button {
+        /* width: 25px; */
         color: white;
         background-color: #FF7F50;
         border: 0;
-        padding: 20px 30px;
+        padding: 20px 25px;
         border-radius: 5px;
         cursor: pointer;
+        margin-bottom: 10px;
+        /* box-sizing: border-box; */
     }
 
     .product__button:disabled {
@@ -171,7 +182,8 @@
     }
 
     .basket__number {
-       color: #FF7F50;
+        color: #FF7F50;
+        cursor: pointer;
     }
 
     .basket__product-price {
