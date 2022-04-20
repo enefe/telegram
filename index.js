@@ -26,7 +26,7 @@ const minusFullPrice = (currentPrice) => {
 };
 
 const printFullPrice = () => {
-	fullPrice.textContent = `${normalPrice(price)} ₽`;
+	fullPrice.textContent = `Итого: ${normalPrice(price)} ₽`;
 };
 
 /* const printQuantity = () => {
