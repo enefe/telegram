@@ -126,12 +126,13 @@ const popup = document.querySelector('.basket');
 
 openPopup.addEventListener('click', (e) => {
     popup.classList.add('active');
-    openPopup.classList.add('hide');
+    document.querySelector('.catalog__items').classList.add('hide');
+    window.scrollTo(0, 0);
 })
 
 closePopup.addEventListener('click', () => {
     popup.classList.remove('active');
-    openPopup.classList.remove('hide');
+    document.querySelector('.catalog__items').classList.remove('hide');
 })
 
 /* let plusMin = `
