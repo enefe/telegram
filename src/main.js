@@ -101,11 +101,11 @@ closePopup.addEventListener('click', () => {
 
 const pay = document.querySelector('.basket__button');
 
-/* const TelegramBot = require('node-telegram-bot-api');
+const TelegramBot = require('node-telegram-bot-api');
 
 const token = '5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo';
 
-const bot = new TelegramBot(token, { polling: true }); */
+const bot = new TelegramBot(token, { polling: true });
 
 pay.addEventListener('click', () => {
 
@@ -114,6 +114,6 @@ pay.addEventListener('click', () => {
     Telegram.WebApp.sendData(full);
     console.log(Telegram.WebApp.WebAppInfo);
     /* console.log(Telegram.WebApp.initData.user.id);*/
-    /* bot.sendMessage(Telegram.WebApp.initData.user.id, '${full}'); */
+    bot.sendMessage(Telegram.WebApp.initData.user.id, '${full}');
 
 })
