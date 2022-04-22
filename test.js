@@ -1,0 +1,1 @@
+/* console.log(Telegram.WebApp.initData.user.id); */
