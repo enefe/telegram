@@ -1,24 +1,22 @@
 @media(min-width: 320px) {
     .content {
         min-width: 300px;
-        color:black;
+        color: black;
         background-color: #ffe5e5;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
-
     .catalog {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
-
     .catalog__title {
         text-align: center;
         font-size: 60px;
         margin: 10px 0 15px;
         padding: 0;
     }
-
     .catalog__items {
         display: flex;
         align-items: flex-start;
@@ -26,7 +24,6 @@
         flex-wrap: wrap;
         width: 100%;
     }
-
     .product {
         /* width: 100px; */
         width: 30%;
@@ -36,7 +33,6 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
-        
         position: relative;
         box-shadow: 3px 3px 3px #ff7f50a1;
         background-color: #fceded;
@@ -45,11 +41,9 @@
         padding-top: 10px;
         /* padding: 10px; */
     }
-
     .product:nth-child(3n) {
         margin-right: 0;
     }
-
     .product__number {
         text-align: center;
         color: white;
@@ -63,25 +57,23 @@
         border-radius: 30px;
         /* display: none; */
     }
-
     .product__image {
         width: 80px;
     }
-
     .product__name {
         text-align: center;
-        max-width: 190px;
-        font-size: 20px;
+        width: 75px;
+        /* min-width: 80px;
+        max-width: 190px; */
+        font-size: 16px;
         margin: 15px 0 10px;
         padding: 0;
     }
-
     .product__call {
         font-size: 20px;
         margin: 0 0 10px;
         padding: 0;
     }
-
     .product__button {
         /* width: 25px; */
         color: white;
@@ -95,38 +87,28 @@
         margin-bottom: 10px;
         /* box-sizing: border-box; */
     }
-
     .product__button:disabled {
         opacity: 0.4;
         pointer-events: none;
     }
-
     .product__plus-minus {
         /* display: none; */
-       /*  position: absolute; */
+        /*  position: absolute; */
         display: flex;
     }
-
     .plus {
         margin-right: 5px;
     }
-
     .catalog__button {
-        color: white;
+        color: #62639b;
         text-decoration: none;
-        margin-top: 50px; 
+        margin-top: 50px;
         background-color: #64f584;
         border: 0;
         padding: 20px 30px;
         border-radius: 5px;
         cursor: pointer;
     }
-
-
-
-
-
-
     .basket {
         display: none;
         position: absolute;
@@ -140,17 +122,15 @@
         align-items: center;
         min-width: 300px;
     }
-
     .basket.active {
         display: flex;
+        margin-bottom: 50px;
     }
-
     .basket__title {
         font-size: 60px;
         margin: 10px 0 15px;
         padding: 0;
     }
-
     .basket__edit {
         margin-bottom: 10px;
         text-decoration: none;
@@ -161,14 +141,12 @@
         border-radius: 5px;
         cursor: pointer;
     }
-
     .basket__products {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
-
     .basket__product {
         display: flex;
         position: relative;
@@ -180,22 +158,18 @@
         width: 95%;
         box-sizing: border-box;
     }
-
     .basket__product-left {
         display: flex;
-       /*  margin-right: 20px; */
+        /*  margin-right: 20px; */
     }
-
     .basket__product-image {
         width: 100px;
     }
-
     .basket__product-title {
         font-size: 20px;
         margin: 0 15px;
         padding: 0;
     }
-
     .basket__number {
         color: #FF7F50;
         cursor: pointer;
@@ -203,25 +177,26 @@
         bottom: 5px;
         right: 5px;
     }
-
     .basket__product-price {
         /* width: 40px; */
         font-size: 15px;
         margin: 0;
         padding: 0;
     }
-
     .basket__button {
-        color: white;
+        color: #62639b;
         text-decoration: none;
-        margin-top: 50px; 
+        margin-top: 50px;
+        margin-bottom: 30px;
         background-color: #64f584;
         border: 0;
         padding: 20px 30px;
         border-radius: 5px;
         cursor: pointer;
     }
-
+    .basket__footer {
+        padding: 20px 30px;
+    }
     .hide {
         display: none;
     }

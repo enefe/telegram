@@ -1,4 +1,5 @@
 Telegram.WebApp.ready();
+
 const adds = document.querySelectorAll('.product__button');
 const deleteProduct = document.querySelectorAll('.basket__number');
 const plus = document.querySelectorAll('.plus');
@@ -6,7 +7,7 @@ const minus = document.querySelectorAll('.minus');
 const cartProductsList = document.querySelector('.basket__products');
 const fullPrice = document.querySelector('.fullprice');
 let price = 0;
-let num = 0;
+/* let num = 0; */
 
 const randomId = () => {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -32,12 +33,6 @@ const printFullPrice = () => {
     fullPrice.textContent = `Итого: ${normalPrice(price)} ₽`;
 };
 
-/* const printQuantity = () => {
-	let productsListLength = cartProductsList.querySelector('.basket__product').children.length;
-	cartQuantity.textContent = productsListLength;
-	productsListLength > 0 ? cart.classList.add('active') : cart.classList.remove('active');
-}; */
-
 const generateCartProduct = (img, title, price, id) => {
     return `
         <div class="basket__product" data-id="${id}">
@@ -60,15 +55,6 @@ const deleteProducts = (productParent) => {
     productParent.remove();
 }
 
-/* const generateButtons = () => {
-    return `
-        <div class="product__plus-minus">
-            <button class="product__button plus">+</button>
-            <button class="product__button minus">-</button>
-        </div>
-	`;
-} */
-
 adds.forEach(el => {
     el.closest('.product').setAttribute('data-id', randomId());
 
@@ -82,21 +68,13 @@ adds.forEach(el => {
         number.textContent = Number(number.textContent) + 1;
         let priceString = priceWithoutSpaces(parent.querySelector('.product__call').textContent);
         let priceNumber = parseInt(priceWithoutSpaces(parent.querySelector('.product__call').textContent));
-        /* console.log(priceNumber); */
         plusFullPrice(priceNumber);
 
         printFullPrice();
 
         cartProductsList.insertAdjacentHTML('afterbegin', generateCartProduct(img, title, priceString, id));
 
-        /* printQuantity(); */
-
         self.disabled = true;
-        /* self.classList.remove('product__button');
-        self.textContent = '';
-        self.insertAdjacentHTML('afterbegin', generateButtons()); */
-
-
     });
 });
 
@@ -105,21 +83,6 @@ cartProductsList.addEventListener('click', (e) => {
         deleteProducts(e.target.closest('.basket__product'));
     }
 })
-
-/* deleteProduct.forEach(el => {
-    el.addEventListener('click', (e) => {
-        console.log(e);
-        let self = e.currentTarget;
-        let parent = self.closest('.basket__product');
-        parent.remove();
-    })
-}) */
-
-/* minus.forEach(el => {
-    el.addEventListener('click', (e) => {
-        el.closest('.product__plus-minus').remove();
-    })
-}) */
 
 const openPopup = document.querySelector('.catalog__button');
 const closePopup = document.querySelector('.basket__edit');
@@ -138,54 +101,19 @@ closePopup.addEventListener('click', () => {
 
 const pay = document.querySelector('.basket__button');
 
-const TelegramBot = require('node-telegram-bot-api');
+/* const TelegramBot = require('node-telegram-bot-api');
 
 const token = '5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo';
 
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(token, { polling: true }); */
 
 pay.addEventListener('click', () => {
 
     let full = document.querySelector('.fullprice').textContent;
     Telegram.WebApp.close();
     Telegram.WebApp.sendData(full);
-    console.log(Telegram.WebApp.initData.user.id);
-    bot.sendMessage(Telegram.WebApp.initData.user.id, '${full}')
+    console.log(Telegram.WebApp.WebAppInfo);
+    /* console.log(Telegram.WebApp.initData.user.id);*/
+    /* bot.sendMessage(Telegram.WebApp.initData.user.id, '${full}'); */
+
 })
-
-
-/* let plusMin = `
-    <div class="product__plus-minus">
-        <button class="product__button plus">+</button>
-        <button class="product__button minus">-</button>
-    </div>
-`; */
-
-/* const plusMin = () => {
-	return `
-        <div class="product__plus-minus">
-            <button class="product__button plus">+</button>
-            <button class="product__button minus">-</button>
-        </div>
-    `;
-}; */
-
-/* adds.forEach((el) => {
-    el.addEventListener('click', (e) => {
-        let self = e.currentTarget;
-        self.classList.add('hide');
-        console.log(self);
-        self = plusMin();
-    })
-}) */
-
-/* function clicked(slide_button) {
-    let buttons = document.getElementsByClassName('product__button');
-    const minPlus = document.querySelectorAll('.product__plus-minus');
-    for(var i = 0; i < buttons.length; i++) {
-        
-    }
-    slide_button.style.disabled;
-    console.log(buttons);
-
-} */
