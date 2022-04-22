@@ -120,7 +120,7 @@ pay.addEventListener('click', () => {
         return fetch(url, {
                 method: "GET",
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
+                    "Content-Type": "application/json"
                 }
             })
             .then((res) => {
