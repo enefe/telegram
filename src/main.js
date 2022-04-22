@@ -101,19 +101,42 @@ closePopup.addEventListener('click', () => {
 
 const pay = document.querySelector('.basket__button');
 
-const TelegramBot = require('node-telegram-bot-api');
+/* const TelegramBot = require('node-telegram-bot-api');
 
 const token = '5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo';
 
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(token, { polling: true }); */
 
 pay.addEventListener('click', () => {
 
     let full = document.querySelector('.fullprice').textContent;
     Telegram.WebApp.close();
     Telegram.WebApp.sendData(full);
-    console.log(Telegram.WebApp.WebAppInfo);
-    /* console.log(Telegram.WebApp.initData.user.id);*/
-    bot.sendMessage(Telegram.WebApp.initData.user.id, '${full}');
+    /* console.log(Telegram.WebApp.WebAppInfo); */
+    console.log(Telegram.WebApp.initData.user.id);
+    /* bot.sendMessage(Telegram.WebApp.initData.user.id, '${full}'); */
+
+    function getBot(url) {
+        return fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                }
+            });
+    }
+
+    let url = 'https://api.telegram.org/bot5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo/getMe';
+
+    getBot(url)
+        .then((data) => {
+            console.log(data);
+            data.sendMessage(Telegram.WebApp.initData.user.id, '${full}');
+        });
+
 
 })
