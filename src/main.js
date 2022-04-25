@@ -117,7 +117,6 @@ pay.addEventListener('click', () => {
     let d = data;
     let dd = d.replaceAll("%3A", ":");
     let ddd = dd.replaceAll("%2C", ",");
-    console.log(ddd);
 
     function strToObj(str) {
         var obj = {};
@@ -152,7 +151,9 @@ pay.addEventListener('click', () => {
             });
     }
 
-    let url = 'https://api.telegram.org/bot5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo/sendMessage?chat_id={user.id}&text=Печенек много не бывает!';
+    let url = 'https://api.telegram.org/bot' + token + '?chat_id=' + user.id + '&text=' + full;
+
+    console.log(url);
 
     getBot(url)
         .then((data) => {
