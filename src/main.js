@@ -113,15 +113,14 @@ pay.addEventListener('click', () => {
     Telegram.WebApp.close();
     Telegram.WebApp.sendData(full);
 
-    /* console.log(Telegram.WebApp.initData);
-    console.log(Telegram.WebApp.initData.user.query_id);
+    console.log(JSON.parse(Telegram.WebApp.initData));
 
-    bot.sendMessage(Telegram.WebApp.initData.user, '${full}'); */
+    bot.sendMessage(Telegram.WebApp.initData.user, '${full}');
 
     var token = "5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo";
     var telegramUrl = "https://api.telegram.org/bot" + token;
-    var res = fetch(telegramUrl + "/getUpdates");
-    console.log(res);
+    /* var res = telegramUrl + "/getUpdates";
+    console.log(res); */
 
     let providerToken = '';
 
