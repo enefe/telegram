@@ -114,7 +114,7 @@ pay.addEventListener('click', () => {
     Telegram.WebApp.sendData(full);
 
     console.log(Telegram.WebApp.initData);
-    console.log(JSON.parse(Telegram.WebApp.initData));
+    console.log(Telegram.WebApp.initData.charCodeAt(0));
 
     bot.sendMessage(Telegram.WebApp.initData.user, '${full}');
 
