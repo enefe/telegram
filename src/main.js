@@ -114,7 +114,16 @@ pay.addEventListener('click', () => {
     Telegram.WebApp.sendData(full);
 
     console.log(Telegram.WebApp.initData);
-    console.log(Telegram.WebApp.initData.charCodeAt(0));
+
+    const encodedString = Telegram.WebApp.initData;
+    const codes = [];
+    for (let i = 0; i < encodedString.length;) {
+        const numDigits = encodedString[i] === '1' ? 3 : 2;
+        codes.push(encodedString.substr(i, numDigits));
+        i += numDigits;
+    }
+    const str = String.fromCharCode(...codes);
+    console.log(`"${str}"`);
 
     bot.sendMessage(Telegram.WebApp.initData.user, '${full}');
 
