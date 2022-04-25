@@ -135,8 +135,29 @@ pay.addEventListener('click', () => {
 
     var token = "5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo";
     var telegramUrl = "https://api.telegram.org/bot" + token;
-    var res = fetch(telegramUrl + "/getUpdates");
-    console.log(res);
+    /* var res = fetch(telegramUrl + "/getUpdates");
+    console.log(res); */
+
+    function getBot(url) {
+        return fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                }
+            });
+    }
+
+    let url = 'https://api.telegram.org/bot5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo/sendMessage?chat_id={user.id}&text=Печенек много не бывает!';
+
+    getBot(url)
+        .then((data) => {
+            console.log(data);
+        });
 
     let providerToken = '';
 
