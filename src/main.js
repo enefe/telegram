@@ -112,8 +112,8 @@ pay.addEventListener('click', () => {
     let full = document.querySelector('.fullprice').textContent;
     Telegram.WebApp.close();
     Telegram.WebApp.sendData(full);
-    console.log(Telegram.WebApp.initData);
-    console.log(Telegram.WebApp.initData.user.id);
+    console.log(Telegram.WebApp.initData.user);
+    console.log(Telegram.WebApp.initData.user.query_id);
 
     /* bot.sendMessage(Telegram.WebApp.initData.user.id, '${full}'); */
 
