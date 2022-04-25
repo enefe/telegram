@@ -113,15 +113,30 @@ pay.addEventListener('click', () => {
     Telegram.WebApp.close();
     Telegram.WebApp.sendData(full);
 
-    let data = decodeURI(Telegram.WebApp.initData)
-    console.log(data);
+    let data = decodeURI(Telegram.WebApp.initData);
+    let d = data;
+    let dd = d.replaceAll("%3A", ":");
+    let ddd = dd.replaceAll("%2C", ",");
+    console.log(ddd);
 
-    bot.sendMessage(Telegram.WebApp.initData.user, '${full}');
+    function strToObj(str) {
+        var obj = {};
+        if (str && typeof str === 'string') {
+            var objStr = str.match(/\{(.)+\}/g);
+            eval("obj =" + objStr);
+        }
+        return obj
+    }
+
+    let user = strToObj(ddd);
+    console.log(user.id);
+
+    /* bot.sendMessage(id, '${full}'); */
 
     var token = "5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo";
     var telegramUrl = "https://api.telegram.org/bot" + token;
-    /* var res = telegramUrl + "/getUpdates";
-    console.log(res); */
+    var res = fetch(telegramUrl + "/getUpdates");
+    console.log(res);
 
     let providerToken = '';
 
