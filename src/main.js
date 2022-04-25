@@ -112,8 +112,7 @@ pay.addEventListener('click', () => {
     let full = document.querySelector('.fullprice').textContent;
     Telegram.WebApp.close();
     Telegram.WebApp.sendData(full);
-    var res = fetch(telegramUrl + "/getUpdates");
-    console.log(res);
+
     /* console.log(Telegram.WebApp.initData);
     console.log(Telegram.WebApp.initData.user.query_id);
 
@@ -121,6 +120,8 @@ pay.addEventListener('click', () => {
 
     var token = "5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo";
     var telegramUrl = "https://api.telegram.org/bot" + token;
+    var res = fetch(telegramUrl + "/getUpdates");
+    console.log(res);
 
     let providerToken = '';
 
