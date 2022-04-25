@@ -112,31 +112,21 @@ pay.addEventListener('click', () => {
     let full = document.querySelector('.fullprice').textContent;
     Telegram.WebApp.close();
     Telegram.WebApp.sendData(full);
-    /* console.log(Telegram.WebApp.WebAppInfo); */
+    console.log(Telegram.WebApp.initData);
+    console.log(Telegram.WebApp.initData.user.id);
 
     /* bot.sendMessage(Telegram.WebApp.initData.user.id, '${full}'); */
 
-    function getBot(url) {
-        return fetch(url, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                }
-            });
+    var token = "5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo";
+    var telegramUrl = "https://api.telegram.org/bot" + token;
+
+    /* function getChat_id() {
+        var res = fetch(telegramUrl + "/getUpdates");
+        console.log(res);
+        var res = JSON.parse(res);
+        console.log(res.result[0].message.chat.id.toString());
     }
 
-    let url = 'https://api.telegram.org/bot5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo/getMe';
-
-    getBot(url)
-        .then((data) => {
-            console.log(data);
-            data.sendMessage(Telegram.WebApp.initData.user.id, '${full}');
-        });
-
+    getChat_id(); */
 
 })
