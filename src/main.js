@@ -137,7 +137,7 @@ pay.addEventListener('click', () => {
     /* var res = fetch(telegramUrl + "/getUpdates");
     console.log(res); */
 
-    function getBot(url) {
+    /* function getBot(url) {
         return fetch(url, {
                 method: "GET",
                 headers: {
@@ -149,16 +149,20 @@ pay.addEventListener('click', () => {
                     return res.json();
                 }
             });
-    }
+    } */
 
     let url = 'https://api.telegram.org/bot' + token + '?chat_id=' + user.id + '&text=' + full;
 
+    var oReq = new XMLHttpRequest();
+    oReq.open("GET", url, true);
+    oReq.send();
+
     console.log(url);
 
-    getBot(url)
+    /* getBot(url)
         .then((data) => {
             console.log(data);
-        });
+        }); */
 
     let providerToken = '';
 
