@@ -1,5 +1,32 @@
 Telegram.WebApp.ready();
 
+let data = decodeURI(Telegram.WebApp.initData);
+let d = data;
+let dd = d.replaceAll("%3A", ":");
+let ddd = dd.replaceAll("%2C", ",");
+
+function strToObj(str) {
+    var obj = {};
+    if (str && typeof str === 'string') {
+        var objStr = str.match(/\{(.)+\}/g);
+        eval("obj =" + objStr);
+    }
+    return obj
+}
+
+let user = strToObj(ddd);
+let token = "5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo";
+
+const TelegramBot = require('node-telegram-bot-api');
+
+const bot = new TelegramBot(token, { polling: true });
+
+bot.onText(/\/start/, (msg, match) => {
+    const chatId = msg.chat.id;
+
+    bot.sendMessage(chatId, 'Start Test');
+})
+
 const pay = document.querySelector('.basket__button');
 const adds = document.querySelectorAll('.product__button');
 const deleteProduct = document.querySelectorAll('.basket__number');
@@ -8,7 +35,6 @@ const minus = document.querySelectorAll('.minus');
 const cartProductsList = document.querySelector('.basket__products');
 const fullPrice = document.querySelector('.fullprice');
 let price = 0;
-/* let num = 0; */
 
 const randomId = () => {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -103,55 +129,10 @@ closePopup.addEventListener('click', () => {
 })
 
 pay.addEventListener('click', () => {
-
     let full = document.querySelector('.fullprice').textContent;
-    /* console.log(typeof(full)); */
     Telegram.WebApp.close();
-    Telegram.WebApp.sendData(full);
-
-    let data = decodeURI(Telegram.WebApp.initData);
-    let d = data;
-    let dd = d.replaceAll("%3A", ":");
-    let ddd = dd.replaceAll("%2C", ",");
-
-    function strToObj(str) {
-        var obj = {};
-        if (str && typeof str === 'string') {
-            var objStr = str.match(/\{(.)+\}/g);
-            eval("obj =" + objStr);
-        }
-        return obj
-    }
-
-    let user = strToObj(ddd);
-
-    let token = "5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo";
 
     let providerToken = '284685063:TEST:MTkzYzAzZTlhOTRh';
-
-    const getInvoice = (id) => {
-        const invoice = {
-            chat_id: id, // Уникальный идентификатор целевого чата или имя пользователя целевого канала
-            title: 'Итого к оплате:', // Название продукта, 1-32 символа
-            description: 'тест', // Описание продукта, 1-255 знаков
-            payload: { // Полезные данные счета-фактуры, определенные ботом, 1–128 байт. Это не будет отображаться пользователю, используйте его для своих внутренних процессов.
-                unique_id: `${id}_${Number(new Date())}`,
-                provider_token: providerToken
-            },
-            provider_token: providerToken, // токен выданный через бот @SberbankPaymentBot
-            currency: 'RUB', // Трехбуквенный код валюты ISO 4217
-            prices: [{ label: 'Invoice Title', amount: 100 * full }], // Разбивка цен, сериализованный список компонентов в формате JSON 100 копеек * 100 = 100 рублей
-            start_parameter: 'get_access', //Уникальный параметр глубинных ссылок. Если оставить поле пустым, переадресованные копии отправленного сообщения будут иметь кнопку «Оплатить», позволяющую нескольким пользователям производить оплату непосредственно из пересылаемого сообщения, используя один и тот же счет. Если не пусто, перенаправленные копии отправленного сообщения будут иметь кнопку URL с глубокой ссылкой на бота (вместо кнопки оплаты) со значением, используемым в качестве начального параметра.
-            photo_url: '/images/icon.png', // URL фотографии товара для счета-фактуры. Это может быть фотография товара или рекламное изображение услуги. Людям больше нравится, когда они видят, за что платят.
-            photo_width: 500, // Ширина фото
-            photo_height: 281, // Длина фото
-
-        }
-
-        return invoice
-    }
-
-    let pay = getInvoice(user.id);
 
     let fullNum = +full.replace(/[^0-9]/g, "");
 
@@ -159,12 +140,11 @@ pay.addEventListener('click', () => {
 
     let imagePayUrl = 'https://i.pinimg.com/originals/3d/f5/c2/3df5c211772a65b7dede560b8859be6e.png';
 
-    let url = `https://api.telegram.org/bot${token}/sendInvoice?chat_id=${user.id}&title=${full}&description=Оплатите ваш заказ на сумму ${fullNum} рублей.&payload=${full}&provider_token=${providerToken}&currency=RUB&prices=${objPrices}&photo_url=${imagePayUrl}&photo_width=500px&photo_height=500px&need_shipping_address=true&parse_mode=html`;
+    let payUrl = `https://api.telegram.org/bot${token}/sendInvoice?chat_id=${user.id}&title=${full}&description=Оплатите ваш заказ на сумму ${fullNum} рублей.&payload=${full}&provider_token=${providerToken}&currency=RUB&prices=${objPrices}&photo_url=${imagePayUrl}&photo_width=500px&photo_height=500px&need_shipping_address=true&parse_mode=html`;
 
-    console.log(url);
+    console.log(payUrl);
 
-    var oReq = new XMLHttpRequest();
-    oReq.open("GET", url, true);
-    oReq.send();
-
+    var payReq = new XMLHttpRequest();
+    payReq.open("GET", payUrl, true);
+    payReq.send();
 })
