@@ -153,53 +153,49 @@ pay.addEventListener('click', () => {
             });
     } */
 
-    let url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.id}&text=${full}&parse_mode=html`;
+    /* let url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.id}&text=${full}&parse_mode=html`;
 
     var oReq = new XMLHttpRequest();
     oReq.open("GET", url, true);
-    oReq.send();
-
-    console.log(url);
+    oReq.send(); */
 
     /* getBot(url)
         .then((data) => {
             console.log(data);
         }); */
 
-    let providerToken = '';
+    let providerToken = 'MTkzYzAzZTlhOTRh';
 
     const getInvoice = (id) => {
         const invoice = {
             chat_id: id, // Уникальный идентификатор целевого чата или имя пользователя целевого канала
-            provider_token: providerToken, // токен выданный через бот @SberbankPaymentBot
-            start_parameter: 'get_access', //Уникальный параметр глубинных ссылок. Если оставить поле пустым, переадресованные копии отправленного сообщения будут иметь кнопку «Оплатить», позволяющую нескольким пользователям производить оплату непосредственно из пересылаемого сообщения, используя один и тот же счет. Если не пусто, перенаправленные копии отправленного сообщения будут иметь кнопку URL с глубокой ссылкой на бота (вместо кнопки оплаты) со значением, используемым в качестве начального параметра.
             title: 'Итого к оплате:', // Название продукта, 1-32 символа
             description: 'тест', // Описание продукта, 1-255 знаков
-            currency: 'RUB', // Трехбуквенный код валюты ISO 4217
-            prices: [{ label: 'Invoice Title', amount: 100 * 100 }], // Разбивка цен, сериализованный список компонентов в формате JSON 100 копеек * 100 = 100 рублей
-            photo_url: '/images/icon.png', // URL фотографии товара для счета-фактуры. Это может быть фотография товара или рекламное изображение услуги. Людям больше нравится, когда они видят, за что платят.
-            photo_width: 500, // Ширина фото
-            photo_height: 281, // Длина фото
             payload: { // Полезные данные счета-фактуры, определенные ботом, 1–128 байт. Это не будет отображаться пользователю, используйте его для своих внутренних процессов.
                 unique_id: `${id}_${Number(new Date())}`,
                 provider_token: providerToken
-            }
+            },
+            provider_token: providerToken, // токен выданный через бот @SberbankPaymentBot
+            currency: 'RUB', // Трехбуквенный код валюты ISO 4217
+            prices: [{ label: 'Invoice Title', amount: 100 * 100 }], // Разбивка цен, сериализованный список компонентов в формате JSON 100 копеек * 100 = 100 рублей
+            start_parameter: 'get_access', //Уникальный параметр глубинных ссылок. Если оставить поле пустым, переадресованные копии отправленного сообщения будут иметь кнопку «Оплатить», позволяющую нескольким пользователям производить оплату непосредственно из пересылаемого сообщения, используя один и тот же счет. Если не пусто, перенаправленные копии отправленного сообщения будут иметь кнопку URL с глубокой ссылкой на бота (вместо кнопки оплаты) со значением, используемым в качестве начального параметра.
+            photo_url: '/images/icon.png', // URL фотографии товара для счета-фактуры. Это может быть фотография товара или рекламное изображение услуги. Людям больше нравится, когда они видят, за что платят.
+            photo_width: 500, // Ширина фото
+            photo_height: 281, // Длина фото
+
         }
 
         return invoice
     }
 
-    getInvoice(user.id);
+    let pay = getInvoice(user.id);
 
-    /* function getChat_id() {
-        var res = fetch(telegramUrl + "/getUpdates");
-        console.log(res);
-        var res = JSON.parse(res);
-        console.log(res.result[0].message.chat.id.toString());
-    }
+    let url = `https://api.telegram.org/bot${token}/sendInvoice?chat_id=${user.id}&title=Итого к оплате&description=тест&payload=test&provider_token=${providerToken}&currency=RUB&photo_url=/images/icon.png&photo_width=500&photo_height=500&parse_mode=html`;
 
-    getChat_id(); */
+    console.log(url);
 
-
+    var oReq = new XMLHttpRequest();
+    oReq.open("GET", url, true);
+    oReq.send();
 
 })
