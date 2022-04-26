@@ -110,6 +110,7 @@ const bot = new TelegramBot(token, { polling: true }); */
 pay.addEventListener('click', () => {
 
     let full = document.querySelector('.fullprice').textContent;
+    /* console.log(typeof(full)); */
     Telegram.WebApp.close();
     Telegram.WebApp.sendData(full);
 
@@ -129,6 +130,7 @@ pay.addEventListener('click', () => {
 
     let user = strToObj(ddd);
     console.log(user.id);
+    console.log(typeof(user.id));
 
     /* bot.sendMessage(id, '${full}'); */
 
