@@ -17,7 +17,7 @@ function strToObj(str) {
 let user = strToObj(ddd);
 let token = "5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo";
 
-const TelegramBot = require('node-telegram-bot-api');
+/* const TelegramBot = require('node-telegram-bot-api');
 
 const bot = new TelegramBot(token, { polling: true });
 
@@ -25,13 +25,10 @@ bot.onText(/\/start/, (msg, match) => {
     const chatId = msg.chat.id;
 
     bot.sendMessage(chatId, 'Start Test');
-})
+}) */
 
 const pay = document.querySelector('.basket__button');
 const adds = document.querySelectorAll('.product__button');
-const deleteProduct = document.querySelectorAll('.basket__number');
-const plus = document.querySelectorAll('.plus');
-const minus = document.querySelectorAll('.minus');
 const cartProductsList = document.querySelector('.basket__products');
 const fullPrice = document.querySelector('.fullprice');
 let price = 0;
