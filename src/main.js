@@ -164,7 +164,7 @@ pay.addEventListener('click', () => {
             console.log(data);
         }); */
 
-    let providerToken = 'MTkzYzAzZTlhOTRh';
+    let providerToken = '284685063:TEST:MTkzYzAzZTlhOTRh';
 
     const getInvoice = (id) => {
         const invoice = {
@@ -177,7 +177,7 @@ pay.addEventListener('click', () => {
             },
             provider_token: providerToken, // токен выданный через бот @SberbankPaymentBot
             currency: 'RUB', // Трехбуквенный код валюты ISO 4217
-            prices: [{ label: 'Invoice Title', amount: 100 * 100 }], // Разбивка цен, сериализованный список компонентов в формате JSON 100 копеек * 100 = 100 рублей
+            prices: [{ label: 'Invoice Title', amount: 100 * full }], // Разбивка цен, сериализованный список компонентов в формате JSON 100 копеек * 100 = 100 рублей
             start_parameter: 'get_access', //Уникальный параметр глубинных ссылок. Если оставить поле пустым, переадресованные копии отправленного сообщения будут иметь кнопку «Оплатить», позволяющую нескольким пользователям производить оплату непосредственно из пересылаемого сообщения, используя один и тот же счет. Если не пусто, перенаправленные копии отправленного сообщения будут иметь кнопку URL с глубокой ссылкой на бота (вместо кнопки оплаты) со значением, используемым в качестве начального параметра.
             photo_url: '/images/icon.png', // URL фотографии товара для счета-фактуры. Это может быть фотография товара или рекламное изображение услуги. Людям больше нравится, когда они видят, за что платят.
             photo_width: 500, // Ширина фото
@@ -190,7 +190,14 @@ pay.addEventListener('click', () => {
 
     let pay = getInvoice(user.id);
 
-    let url = `https://api.telegram.org/bot${token}/sendInvoice?chat_id=${user.id}&title=Итого к оплате&description=тест&payload=test&provider_token=${providerToken}&currency=RUB&photo_url=/images/icon.png&photo_width=500&photo_height=500&parse_mode=html`;
+    let fullNum = +full.replace(/[^0-9]/g, "");
+
+    let objPrices = JSON.stringify([{ label: 'Invoice Title', amount: 100 * fullNum }]);
+
+    let imagePayUrl = 'https://i.pinimg.com/originals/3d/f5/c2/3df5c211772a65b7dede560b8859be6e.png';
+
+
+    let url = `https://api.telegram.org/bot${token}/sendInvoice?chat_id=${user.id}&title=${full}&description=Оплатите ваш заказ на сумму ${fullNum} рублей.&payload=${full}&provider_token=${providerToken}&currency=RUB&prices=${objPrices}&photo_url=${imagePayUrl}&photo_width=500px&photo_height=500px&parse_mode=html`;
 
     console.log(url);
 
