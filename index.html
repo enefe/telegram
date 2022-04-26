@@ -97,19 +97,7 @@
     </div>
 
     <script src="./src/main.js"></script>
-    <script>
-        const TelegramBot = require('node-telegram-bot-api');
 
-        const bot = new TelegramBot(token, {
-            polling: true
-        });
-
-        bot.onText(/\/start/, (msg, match) => {
-            const chatId = msg.chat.id;
-
-            bot.sendMessage(chatId, 'Start Test');
-        })
-    </script>
 </body>
 
 </html>
