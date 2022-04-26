@@ -151,7 +151,7 @@ pay.addEventListener('click', () => {
             });
     } */
 
-    let url = 'https://api.telegram.org/bot' + token + '?chat_id=' + user.id + '&text=' + full;
+    let url = 'https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + user.id + '&text=' + full;
 
     var oReq = new XMLHttpRequest();
     oReq.open("GET", url, true);
