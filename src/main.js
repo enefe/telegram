@@ -1,5 +1,6 @@
 Telegram.WebApp.ready();
 
+const pay = document.querySelector('.basket__button');
 const adds = document.querySelectorAll('.product__button');
 const deleteProduct = document.querySelectorAll('.basket__number');
 const plus = document.querySelectorAll('.plus');
@@ -59,6 +60,8 @@ adds.forEach(el => {
     el.closest('.product').setAttribute('data-id', randomId());
 
     el.addEventListener('click', (e) => {
+        pay.classList.remove('hide');
+
         let self = e.currentTarget;
         let parent = self.closest('.product');
         let id = parent.dataset.id;
@@ -99,14 +102,6 @@ closePopup.addEventListener('click', () => {
     document.querySelector('.catalog__items').classList.remove('hide');
 })
 
-const pay = document.querySelector('.basket__button');
-
-/* const TelegramBot = require('node-telegram-bot-api');
-
-const token = '5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo';
-
-const bot = new TelegramBot(token, { polling: true }); */
-
 pay.addEventListener('click', () => {
 
     let full = document.querySelector('.fullprice').textContent;
@@ -129,40 +124,8 @@ pay.addEventListener('click', () => {
     }
 
     let user = strToObj(ddd);
-    console.log(user.id);
-    console.log(typeof(user.id));
 
-    /* bot.sendMessage(id, '${full}'); */
-
-    var token = "5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo";
-    var telegramUrl = "https://api.telegram.org/bot" + token;
-    /* var res = fetch(telegramUrl + "/getUpdates");
-    console.log(res); */
-
-    /* function getBot(url) {
-        return fetch(url, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                }
-            });
-    } */
-
-    /* let url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${user.id}&text=${full}&parse_mode=html`;
-
-    var oReq = new XMLHttpRequest();
-    oReq.open("GET", url, true);
-    oReq.send(); */
-
-    /* getBot(url)
-        .then((data) => {
-            console.log(data);
-        }); */
+    let token = "5359355956:AAEAMReleozRWWkMhGSA81MfiGS0ghEBPFo";
 
     let providerToken = '284685063:TEST:MTkzYzAzZTlhOTRh';
 
@@ -192,12 +155,11 @@ pay.addEventListener('click', () => {
 
     let fullNum = +full.replace(/[^0-9]/g, "");
 
-    let objPrices = JSON.stringify([{ label: 'Invoice Title', amount: 100 * fullNum }]);
+    let objPrices = JSON.stringify([{ label: 'Invoice Test Title', amount: 100 * fullNum }]);
 
     let imagePayUrl = 'https://i.pinimg.com/originals/3d/f5/c2/3df5c211772a65b7dede560b8859be6e.png';
 
-
-    let url = `https://api.telegram.org/bot${token}/sendInvoice?chat_id=${user.id}&title=${full}&description=Оплатите ваш заказ на сумму ${fullNum} рублей.&payload=${full}&provider_token=${providerToken}&currency=RUB&prices=${objPrices}&photo_url=${imagePayUrl}&photo_width=500px&photo_height=500px&parse_mode=html`;
+    let url = `https://api.telegram.org/bot${token}/sendInvoice?chat_id=${user.id}&title=${full}&description=Оплатите ваш заказ на сумму ${fullNum} рублей.&payload=${full}&provider_token=${providerToken}&currency=RUB&prices=${objPrices}&photo_url=${imagePayUrl}&photo_width=500px&photo_height=500px&need_shipping_address=true&parse_mode=html`;
 
     console.log(url);
 
